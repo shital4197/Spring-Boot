@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+	<bean id="u" class="com.entity.User">
+		<property name="uid" value="101"></property>
+		<property name="username" value="Minakshi"></property>
+		<property name="contact" value="89574896584"></property>
+		<property name="car" ref="c"></property>
+	</bean>
+
+	<bean id="c" class="com.entity.Car">
+		<property name="id" value="5558"></property>
+		<property name="carname" value="Thar"></property>
+	</bean>
+
+</beans>
