@@ -17,4 +17,16 @@ public class StudentService {
 		String msg = dao.insertData(s);
 		return msg;
 	}
+	
+	public String deleteData(int id) {
+		
+		String msg = dao.deleteData(id);
+		return msg;
+	}
+	
+	public String updatedata(StudentEntity s, int id) {
+		
+		String msg = dao.updateData(s, id);
+		return msg;
+	}
 }

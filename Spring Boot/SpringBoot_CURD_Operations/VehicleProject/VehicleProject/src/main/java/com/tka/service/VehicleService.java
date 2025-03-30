@@ -17,4 +17,14 @@ public class VehicleService {
 		String msg = dao.insertData(vehicle);
 		return msg;
 	}
+
+	public String deleteData(int id) {
+		String msg = dao.deleteData(id);
+		return msg;
+	}
+
+	public String updateData(Vehicle vehicle, int id) {
+		String msg = dao.updateData(vehicle, id);
+		return msg;
+	}
 }

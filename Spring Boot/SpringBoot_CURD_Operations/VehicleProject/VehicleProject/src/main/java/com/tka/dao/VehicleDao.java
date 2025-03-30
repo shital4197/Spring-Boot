@@ -10,19 +10,49 @@ import com.tka.entity.Vehicle;
 
 @Repository
 public class VehicleDao {
+
 	@Autowired
 	SessionFactory factory;
 
-	public String insertData(Vehicle vehicle) {
+	public String insertData(Vehicle v) {
 
 		Session ss = factory.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		ss.persist(vehicle);
+		ss.persist(v);
 		tr.commit();
 		ss.close();
 		return "Data is inserted successfully in your database !";
+	}
+	public String deleteData(int id) {
 
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		Vehicle ve= ss.get(Vehicle.class, id);
+
+		ss.remove(ve);
+		tr.commit();
+		ss.close();
+
+		return "Data is deleted..!";
+	}
+
+	public String updateData(Vehicle v, int id) {
+		
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		Vehicle v1 = ss.get(Vehicle.class, id);
+		v1.setType(v.getType());
+		v1.setName(v.getName());
+		v1.setColor(v.getColor());
+
+		ss.merge(v1);
+		tr.commit();
+		ss.close();
+
+		return "Data is updated...";
 	}
 
 }
