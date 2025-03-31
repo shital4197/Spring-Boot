@@ -1,5 +1,7 @@
 package com.tka.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,15 @@ public class VehicleService {
 	public String updateData(Vehicle vehicle, int id) {
 		String msg = dao.updateData(vehicle, id);
 		return msg;
+	}
+
+	public Vehicle getSingleData(int id) {
+		Vehicle v = dao.getSingleData(id);
+		return v;
+	}
+
+	public List<Vehicle> getAllRecord(Vehicle v) {
+		List<Vehicle> list = dao.getAllData(v);
+		return list;
 	}
 }

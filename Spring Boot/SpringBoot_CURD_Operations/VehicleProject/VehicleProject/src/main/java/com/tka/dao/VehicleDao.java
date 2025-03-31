@@ -1,8 +1,10 @@
 package com.tka.dao;
 
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,12 +26,13 @@ public class VehicleDao {
 		ss.close();
 		return "Data is inserted successfully in your database !";
 	}
+
 	public String deleteData(int id) {
 
 		Session ss = factory.openSession();
 		Transaction tr = ss.beginTransaction();
 
-		Vehicle ve= ss.get(Vehicle.class, id);
+		Vehicle ve = ss.get(Vehicle.class, id);
 
 		ss.remove(ve);
 		tr.commit();
@@ -39,7 +42,7 @@ public class VehicleDao {
 	}
 
 	public String updateData(Vehicle v, int id) {
-		
+
 		Session ss = factory.openSession();
 		Transaction tr = ss.beginTransaction();
 
@@ -53,6 +56,36 @@ public class VehicleDao {
 		ss.close();
 
 		return "Data is updated...";
+	}
+
+	public Vehicle getSingleData(int id) {
+
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		Vehicle s2 = ss.get(Vehicle.class, id);
+
+		tr.commit();
+		ss.close();
+
+		return s2;
+	}
+
+	public List<Vehicle> getAllData(Vehicle v) {
+
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		String hqlQuery = "from Vehicle";
+
+		Query<Vehicle> query = ss.createQuery(hqlQuery, Vehicle.class);
+		List<Vehicle> list = query.list();
+
+		tr.commit();
+		ss.close();
+
+		return list;
+
 	}
 
 }

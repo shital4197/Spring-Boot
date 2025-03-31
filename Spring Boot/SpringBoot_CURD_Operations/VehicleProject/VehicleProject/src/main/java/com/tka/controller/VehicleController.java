@@ -1,7 +1,10 @@
 package com.tka.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,8 +24,8 @@ public class VehicleController {
 	VehicleService service;
 
 	@PostMapping("/savedata")
-	public String insertData(@RequestBody Vehicle vehicle) {
-		String msg = service.insertData(vehicle);
+	public String insertData(@RequestBody Vehicle v) {
+		String msg = service.insertData(v);
 		return msg;
 	}
 
@@ -37,6 +40,18 @@ public class VehicleController {
 	public String updateData(@RequestBody Vehicle vehicle, @PathVariable int id) {
 		String msg = service.updateData(vehicle, id);
 		return msg;
+	}
+
+	@GetMapping("/getsingledata")
+	public Vehicle getSingleData(@RequestParam int id) {
+		Vehicle v = service.getSingleData(id);
+		return v;
+	}
+
+	@GetMapping("/getalldata")
+	public List<Vehicle> getallData(Vehicle v) {
+		List<Vehicle> list = service.getAllRecord(v);
+		return list;
 	}
 
 }

@@ -1,13 +1,14 @@
 package com.tka.dao;
 
-import org.hibernate.Session;
+import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.tka.entity.StudentEntity;
-
 
 @Repository
 public class StudentDao {
@@ -56,4 +57,33 @@ public class StudentDao {
 		return "Data is updated...";
 	}
 
+	public StudentEntity getSingleData(int id) {
+
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		StudentEntity s2 = ss.get(StudentEntity.class, id);
+
+		tr.commit();
+		ss.close();
+
+		return s2;
+	}
+
+	public List<StudentEntity> getAllData(StudentEntity s) {
+
+		Session ss = factory.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		String hqlQuery = "from StudentEntity";
+
+		Query<StudentEntity> query = ss.createQuery(hqlQuery, StudentEntity.class);
+		List<StudentEntity> list = query.list();
+
+		tr.commit();
+		ss.close();
+
+		return list;
+
+	}
 }
